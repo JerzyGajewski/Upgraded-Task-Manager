@@ -34,10 +34,11 @@ public class UserDao {
             e.printStackTrace();
         }
     }
-//bierze usera, którego userName istnieje w bazie danych
+
+    //bierze usera, którego userName istnieje w bazie danych
     public static User getByUserName(String userName) {
         String query = "SELECT * FROM user WHERE userName = ?";
-        List<Map<String, String>> data = DBOperations.getUserData(query, userName);
+        List<Map<String, String>> data = DBOperations.getData(query, userName);
         if (data != null) {
             Map<String, String> firsUser = data.get(0);
             User user = createUserFromDataMap(firsUser);
@@ -54,4 +55,17 @@ public class UserDao {
         return user;
     }
 
+    public static void editUser() {
+    }
+
+    public static void deleteUser(String email) {
+        String query = "DELETE FROM user where email = ?";
+        try (Connection conn = DBOperations.getConnection();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1,email);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

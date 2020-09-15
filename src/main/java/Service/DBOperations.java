@@ -28,7 +28,7 @@ public class DBOperations {
         }
     }
 
-    public static List<Map<String, String>> getUserData(String query, String... params) {
+    public static List<Map<String, String>> getData(String query, String... params) {
         try (
                 Connection conn = getConnection();
                 PreparedStatement statement = conn.prepareStatement(query)

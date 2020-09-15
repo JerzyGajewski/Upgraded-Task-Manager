@@ -3,9 +3,7 @@ import Dao.UserDao;
 import Entity.Tasks;
 import Entity.User;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class test {
 
@@ -14,7 +12,6 @@ public class test {
         System.out.println("Hello, choose option");
         System.out.println("'new' - create new user");
         System.out.println("'login - login into account");
-        System.out.println("'delete' - delete account");
         System.out.println("'exit' - close app");
         System.out.println("Your choise:");
         while (scanner.hasNext()) {
@@ -63,18 +60,66 @@ public class test {
                                 System.out.println("Finished creating");
                                 break;
                             case "2":
-
+                                List<Tasks> list = TasksDao.showAllTasks();
+                                Iterator<Tasks> it = list.iterator();
+                                while (it.hasNext()){
+                                    Tasks task = it.next();
+                                    System.out.println(task.getId() + ". " +task.getDescription() +" "+ task.getImportant());
+                                }
                                 break;
                             case "3":
+                                System.out.println("Select task to remove: ");
+                                int taskId = scanner.nextInt();
+                                scanner.nextLine();
+                                System.out.println("Are you sure to delete task " + taskId +" ?");
+                                String answer = scanner.nextLine();
+                                switch(answer.toLowerCase()){
+                                    case "yes":
+                                    TasksDao.deleteTask(taskId);
+                                    System.out.println("Task deleted");
+                                    break;
+                                    case "no":
+                                        break;
+                                    default:
+                                        System.out.println("Type yes/no");
+                                }
                                 break;
                             case "4":
+                                System.out.println("Are you sure to delete all tasks?");
+                                String answer2 = scanner.nextLine();
+                                switch(answer2.toLowerCase()){
+                                    case "yes":
+                                        TasksDao.deleteAllTasks();
+                                        System.out.println("Task deleted");
+                                        break;
+                                    case "no":
+                                        break;
+                                    default:
+                                        System.out.println("Type yes/no");
+                                }
                                 break;
                             case "5":
+                                System.out.println("Options:");
+                                System.out.println("1 - edit user");
+                                System.out.println("2 - delete account");
+                                int respond = scanner.nextInt();
+                                scanner.nextLine();
+                                switch (respond){
+                                    case 1:
+
+                                    case 2:
+                                        System.out.println("Are you sure?");
+                                        String answer3 = scanner.nextLine();
+                                        if(answer3.toLowerCase().equals("yes")){
+
+                                        }
+
+                                }
                                 break;
                             case "6":
                                 break;
                             default:
-                                System.out.println("wrong commend, try again");
+                                System.out.println("wrong commend, try again!");
 
 
 
@@ -82,8 +127,6 @@ public class test {
                     }else {
                         System.out.println("Wrong login or password, try again");
                     }
-                    break;
-                case "delete":
                     break;
                 case "exit":
                     System.out.println("Bye Bye");
