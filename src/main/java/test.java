@@ -3,6 +3,8 @@ import Dao.UserDao;
 import Entity.Tasks;
 import Entity.User;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class test {
@@ -33,14 +35,13 @@ public class test {
                     System.exit(0);
                     break;
                 case "login":
-                    User user1 = new User();
                     System.out.println("enter username:");
                     String name = scanner.nextLine();
                     System.out.println("enter password:");
                     String password = scanner.nextLine();
-
-                    if (password.equals(user1.getPassword())){
-                        System.out.println("Hello" + user1.getUserName());
+                    User user1 = UserDao.getByUserName(name);
+                    if ( user1 != null && password.equals(user1.getPassword())){
+                        System.out.println("Hello " + user1.getUserName());
                         System.out.println("What you would like to do?");
                         System.out.println("1 - create new task");
                         System.out.println("2 - show all tasks");
@@ -57,7 +58,7 @@ public class test {
                                 System.out.println("Enter description:");
                                 tasks.setDescription(scanner.nextLine());
                                 System.out.println("is it important: (true/false)");
-                                tasks.setImportant(scanner.nextBoolean());
+                                tasks.setImportant(scanner.nextLine());
                                 TasksDao.addNewTask(tasks);
                                 System.out.println("Finished creating");
                                 break;

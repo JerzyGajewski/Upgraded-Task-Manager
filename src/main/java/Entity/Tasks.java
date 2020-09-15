@@ -2,12 +2,12 @@ package Entity;
 
 public class Tasks {
     private String description;
-    private Boolean isImportant;
+    private String isImportant;
 
     public Tasks(){
 
     }
-    public Tasks(String description, Boolean isImportant) {
+    public Tasks(String description, String isImportant) {
         this.description = description;
         this.isImportant = isImportant;
     }
@@ -20,11 +20,11 @@ public class Tasks {
         this.description = description;
     }
 
-    public Boolean getImportant() {
+    public String getImportant() {
         return isImportant;
     }
 
-    public void setImportant(Boolean important) {
+    public void setImportant(String  important) {
         isImportant = important;
     }
 }

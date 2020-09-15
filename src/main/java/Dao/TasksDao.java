@@ -13,7 +13,7 @@ public class TasksDao {
         String query = "CREATE TABLE IF NOT EXISTS task(\n" +
                 "    id INT AUTO_INCREMENT,\n" +
                 "    description TEXT,\n" +
-                "    isImportant BOOLEAN NOT NULL,\n" +
+                "    isImportant TEXT NOT NULL,\n" +
                 "    PRIMARY KEY (id)\n" +
                 ")";
         DBOperations.createTable(query);
